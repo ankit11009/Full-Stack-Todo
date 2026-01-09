@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { use } from 'react';
+import {useNavigate} from "react-router-dom"
+import Login from './Login';
 
 export const Register = () => {
-
+const navigate = useNavigate()
 const [formData,setFormData]=useState({
   fullName:"",
   email:"",
@@ -30,7 +32,20 @@ e.preventDefault()
       'Content-Type':"application/json"
     },
     body:JSON.stringify(formData)
+
+  
   })
+
+  const data = await response.json()
+  if(response.ok){
+    console.log(data);
+    navigate("/Login")
+    
+  }
+  else {
+    console.log("user already");
+    
+  }
   
   
  } catch (error) {
