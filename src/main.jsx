@@ -32,7 +32,7 @@ const router=createBrowserRouter([
         element:<Login/>
       },
       {
-        path:'/Dashboard',
+        path:'/dashboard',
         element:<Dashboard/>,
         loader:async ()=> {
           const res= await axios.get('http://localhost:8000/api/v1/users/current-user',{withCredentials:true})

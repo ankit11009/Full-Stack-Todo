@@ -35,7 +35,7 @@ const handleSubmit=async(e)=>{
         })
         if(res.status ==200){
             console.log("Login Succesfully",res.message);
-            navigate('/Dashboard')
+            navigate('/todo')
             
         }
     } catch (error) {
