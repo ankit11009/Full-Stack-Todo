@@ -34,14 +34,31 @@ const router=createBrowserRouter([
       {
         path:'/dashboard',
         element:<Dashboard/>,
-        loader:async ()=> {
-          const res= await axios.get('http://localhost:8000/api/v1/users/current-user',{withCredentials:true})
-          return res.data
-        }
+      
       },
       {
         path:'/todo',
-        element:<Todo/>
+        element:<Todo/>,
+         loader: async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/api/v1/todo/get-todo', { 
+        withCredentials: true 
+      });
+
+      // Log this to your BROWSER console to see the real structure
+      console.log("Full Axios Response:", res);
+
+      // We need to return the array. 
+      // If res.data.data is undefined, we return []
+      return res?.data?.data || []; 
+      
+    } catch (error) {
+      console.error("Loader Error:", error);
+      // Returning null or undefined causes the 'map' error. 
+      // Returning [] keeps the app alive.
+      return []; 
+    }
+  }
       }
      
     ]
